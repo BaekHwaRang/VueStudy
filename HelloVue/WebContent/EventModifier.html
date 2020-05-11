@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.box{
+		width:200px;
+		height:200px;
+		border:1px solid black;
+	}
+</style>
+<script src="https://unpkg.com/vue"></script>
+<script>
+window.onload = function(){
+	var vm1 = new Vue({
+		el:"#test1",
+		methods:{
+			method1:function(){
+				alert("method1")
+			},
+			method2:function(){
+				alert("method2")
+			}
+		}
+	})
+}
+</script>
+</head>
+<body>
+	<div id="test1">
+		<div class="box" @click="method1">
+			<button type="button" @click="method2">이벤트 버튼</button>
+			<button type="button" @click.stop="method2">이벤트 버튼</button>
+		</div>
+		<a href="http://www.softcampus.co.kr" @click.prevent>softcampus</a>
+		<a href="http://www.softcampus.co.kr" @click.prevent="method1">softcampus</a>
+		<div @click.capture="method1" class="box"><!-- capture 이벤트 우선 처리 -->
+			<button type="button" @click="method2">버튼</button>
+		</div>
+		<div @click.self="method1" class="box"><!-- self 자신의 이벤트만 처리 -->
+			<button type="button" @click="method2">버튼</button>
+			<button type="button" @click="method2">버튼</button>
+		</div>
+		<div @click.once="metohd1"></div><!-- once 브라우저 실행 후 최초 한번만 실행되는 이벤트 -->
+	</div>
+</body>
+</html>

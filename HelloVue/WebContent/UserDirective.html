@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue"></script>
+<script>
+Vue.directive("focus",{
+	inserted:function(el){
+		el.focus()
+	}
+})
+window.onload = function(){
+	var vm1 = new Vue({
+		el:"#test1",
+		data:{
+			str:'',
+			data1:"data1 value"
+		},
+		methods:{
+			setStr:function(){
+				this.str = "변경된 문자열"
+			}
+		},
+		directives:{
+			focus2:{
+				inserted:function(el){
+					el.focus();
+				}
+			},
+			/* 지시자의 생명 주기 */
+			test:{
+				// 지시자가 태그에 셋팅되었을 때 한번만 호출 , 특정 태그에 셋팅 되었을 때
+				bind:function(el){
+					console.log("bind")
+				},
+				// 지시자가 셋팅되어 있는 HTML 태그가 객체로 만들어지고 사용 가능한 형태가 되었을 때 호출되는 함수
+				inserted:function(el){
+					console.log("inserted")
+				},
+				// HTML 태그의 변화가 이루어 졌을 때 호출되는 함수
+				update:function(el){
+					console.log("update")
+				},
+				// 지시자가 셋팅되어 있는 HTML 태그 내부가 변경된 후
+				componentUpdated:function(el){
+					console.log("componentUpdated")
+				},
+				// 지시자가 셋팅되어 있는 태그에서 지시자가 제거될 때 , 사실상 제거될 일이 없음
+				unbind:function(el){
+					console.log("unbind")
+				}
+				//
+				
+				
+			},
+			test2:{
+				bind:function(el,binding,vnode){
+					console.log("el : "+el)
+					console.log("binding name : "+binding.name)
+					console.log("binding value : "+binding.value)
+					console.log("binding arg : "+binding.arg)
+					console.log("binding a1 : "+binding.modifiers.a1)
+					console.log("binding a2 : "+binding.modifiers.a2)
+					console.log("binding a3 : "+binding.modifiers.a3)
+					console.log("binding a3 : "+vnode)
+				}
+			}
+		}
+	})
+}
+
+ 
+</script>
+</head>
+<body>
+	<div id="test1">
+		<input type="text" v-focus/><br/>
+		<input type="text" v-focus2/><br/>
+		<h3 v-test>{{str}}</h3>
+		<button type="button" @click="setStr">str 변경</button>
+		<hr>
+		<!-- 수식을 넣으면 재대로 들어가지만 문자열은 변수를 선언해야 함 -->
+		<h3 v-test2="data1">{{str}}</h3>
+		<h3 v-test2:arg1.a1.a2="data1">{{str}}</h3>
+	</div>
+</body>
+</html>
