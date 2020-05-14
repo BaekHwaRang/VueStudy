@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue"></script>
+<script>
+window.onload = function(){
+	var vm1 = new Vue({
+		el:"#test1",
+		data:{
+			value1:100,
+			obj1:{},
+			counter:0,
+			newValue:0,
+			oldValue:0
+		},
+		methods:{
+			setValue1:function(){
+				this.value1 = 200
+			},
+			setValue2:function(){
+				this.obj1.value2 = 2000
+			},
+			addCounter:function(){
+				this.counter++
+			}
+		}
+	})
+	Vue.set(vm1.obj1,"value2",1000)
+	vm1.$watch("counter",function(newValue,oldValue){
+		this.newValue = newValue
+		this.oldValue = oldValue
+	})
+}
+</script>
+</head>
+<body>
+	<div id="test1">
+		<h3>value1 : {{value1}}</h3>
+		<button type="button" @click="setValue1">버튼</button>
+		<hr/>
+<!-- 		
+		<h3>value2 : {{value2}}</h3> 이미 만들어져 있지 않은 변수는 랜더링이 즉각적이지 않음
+		<button type="button" @click="setValue2">버튼</button>
+-->
+		<h3>value2 : {{obj1.value2}}</h3>
+		<button type="button" @click="setValue2">버튼</button>
+		<hr/>
+		<h3>Counter : {{counter}}</h3>
+		<h3>NewValue : {{newValue}}</h3>
+		<h3>OldValue : {{oldValue}}</h3>
+		<button type="button" @click="addCounter">버튼</button>
+		
+	</div>
+</body>
+</html>

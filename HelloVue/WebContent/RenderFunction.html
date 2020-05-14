@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/vue"></script>
+<script>
+Vue.component("com1",{
+	template:"<h1>Hello Wolrd</h1>"
+})
+Vue.component("com2",{
+	template:"<h1><slot></slot></h1>"
+})
+Vue.component("com3",{
+	render:function(createElement){
+		//var msg = "Hello World"
+		var msg = this.$slots.default[0].text
+		var tagName = this.tagname
+		var idValue = this.id
+		var colorValue = this.color
+		var bgcolorValue = this.bgcolor
+		//alert(tagName)
+		var h1_tag = createElement(tagName,{
+			attrs:{id:idValue
+				//style:"background-color:gray;
+					},
+			style:{
+				color:colorValue,
+				backgroundColor:bgcolorValue
+				
+			}
+		},msg)
+		return h1_tag
+	},
+	props:{
+		tagname:{
+			attributes:String,
+			required:true
+		},
+		id:{
+			attributes:String,
+			required:true
+		},
+		color:{
+			attributes:String
+		},
+		bgcolor:{
+			attributes:String
+		}
+	}
+})
+window.onload = function(){
+	var vm1 = new Vue({
+		el:"#test1"
+	})
+}
+</script>
+</head>
+<body>
+	<div id="test1">
+		<com1>Apple</com1>
+		<com1>Google</com1>
+		<com1>Microsoft</com1>
+		<hr/>
+		<com2>Apple</com2>
+		<com2>Google</com2>
+		<com2>Microsoft</com2>
+		<hr/>
+		<com3 :tagname="'h1'" :id="'a1'" :color="'red'" :bgcolor="'blue'">Apple</com3>
+		<com3 :tagname="'h2'" :id="'a2'" :color="'white'" :bgcolor="'black'">Google</com3>
+		<com3 :tagname="'h3'" :id="'a3'">Microsoft</com3>
+	</div>
+</body>
+</html>
