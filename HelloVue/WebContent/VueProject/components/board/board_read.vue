@@ -28,8 +28,8 @@
 					<div class="form-group">
 						<div class="text-right">
 							<router-link :to="'/board_main/'+$route.params.board_idx+'/'+$route.params.page" class="btn btn-primary">목록보기</router-link>
-							<router-link to="/board_modify" class="btn btn-info">수정하기</router-link>
-							<router-link to="/board_delete" class="btn btn-danger">삭제하기</router-link>
+							<router-link :to="'/board_modify/'+$route.params.board_idx+'/'+$route.params.page+'/'+$route.params.content_idx" v-if='server_data.content_writer_idx == $store.state.user_idx' class="btn btn-info">수정하기</router-link>
+							<router-link :to="'/board_delete/'+$route.params.board_idx+'/'+$route.params.page+'/'+$route.params.content_idx" v-if='server_data.content_writer_idx == $store.state.user_idx' class="btn btn-danger">삭제하기</router-link>
 						</div>
 					</div>
 				</div>

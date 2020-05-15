@@ -57,7 +57,10 @@
 	int content_idx = rs2.getInt("content_idx");
 	
 	db.close();
+	JSONObject content = new JSONObject();
+	content.put("content_idx",content_idx);
 %>
 {
-	"result" : true
+	"result" : true,
+	"content_idx" : <%=content_idx%>
 }

@@ -29,7 +29,7 @@
 						<router-link :to="'/board_main/'+$route.params.board_idx+'/'+server_data.pre" class="page-link">이전</a>
 					</li>
 					<li class="page-item" v-for='a1 in server_data.page_array'>
-						<router-link :to="'/board_main/'+$route.params.board_idx+'/'+$route.params.page+'/'+a1" class="page-link">{{a1}}</router-link>
+						<router-link :to="'/board_main/'+$route.params.board_idx+'/'+a1" class="page-link">{{a1}}</router-link>
 					</li>
 					<li class="page-item">
 						<router-link :to="'/board_main/'+$route.params.board_idx+'/'+server_data.next" class="page-link">다음</router-link>

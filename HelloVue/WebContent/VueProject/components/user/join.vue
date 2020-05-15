@@ -106,7 +106,6 @@
 				params.append("user_id", this.user_id)
 				
 				axios.post("server/user/check_user_id.jsp",params).then((response)=>{
-				console.log(response)
 					if(response.data.check_result == true){
 						alert("사용할 수 없는 아이디 입니다")
 						this.user_id = ''
